@@ -8,7 +8,7 @@ const EmployeeAPI = {
     { number: 6, name: "Igor Astapenko", job: "Rector" },
   ],
 
-  //all возвращает копию массива 
+  // all возвращает копию массива 
   all() {
     return this.employees.slice();
   },
@@ -17,12 +17,12 @@ const EmployeeAPI = {
     return this.employees.find((p) => p.number === id) || null;
   },
 
-  //delete удаляет по number
+  // delete удаляет по number
   delete(id) {
     this.employees = this.employees.filter((p) => p.number !== id);
   },
 
-  //add вычисляет новый number и добавляет сотрудника
+  // add вычисляет новый number и добавляет сотрудника
   add(employee) {
     const maxNumber = this.employees.reduce((m, e) => Math.max(m, e.number || 0), 0);
     const newEmployee = {
