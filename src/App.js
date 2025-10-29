@@ -3,7 +3,9 @@ import "./App.css";
 import EmployeeAPI from "./api/service";
 import Table from "./Table";
 import Login from "./components/Login";
+import NavBar from "./components/NavBar";
 import { isAuthenticated, getUser, logout } from "./utils/auth";
+import { generateNumericId } from "./utils/id"; // <- добавлено
 
 export default function App() {
   const [employees, setEmployees] = useState([]);
@@ -27,20 +29,23 @@ export default function App() {
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  // удаление
   const handleDelete = (number) => {
     EmployeeAPI.delete(number);
     setEmployees(EmployeeAPI.all());
   };
 
-  // добавление
   const handleAdd = (name, job) => {
     if (!name || !name.trim()) return;
-    EmployeeAPI.add({ name: name.trim(), job: (job || "").trim() || "Unknown" });
+    const newEmployee = {
+      id: generateNumericId(), // уникальный числовой ID
+      name: name.trim(),
+      job: (job || "").trim() || "Unknown",
+    };
+   
+    EmployeeAPI.add(newEmployee);
     setEmployees(EmployeeAPI.all());
   };
 
-  // редактирование по number
   const handleEdit = (number, { name, job }) => {
     const existing = EmployeeAPI.get(number);
     if (!existing) return;
@@ -67,11 +72,12 @@ export default function App() {
 
   return (
     <div className="App">
+      <NavBar onLogout={handleLogout} />
       <header className="App-header" style={{ width: "100%" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
           <div>
             <h3 style={{ margin: 0 }}>Привет, {greeting}!</h3>
-            <div style={{ fontSize: 12, color: "#ddd" }}>Добро пожаловать в приложение</div>
+            <div style={{ fontSize: 28, color: "#ddd" }}>Добро пожаловать в приложение!</div>
           </div>
           <div>
             <button onClick={handleLogout} style={{ padding: "6px 10px", cursor: "pointer" }}>
@@ -87,6 +93,20 @@ export default function App() {
             onAdd={handleAdd}
             onEdit={handleEdit}
           />
+
+          {/* Счётчик сотрудников */}
+          <div style={{
+            marginTop: 12,
+            padding: "10px 12px",
+            background: "#fafafa",
+            border: "1px solid #eee",
+            borderRadius: 6,
+            display: "inline-block",
+            fontSize: 14,
+            color: "#333"
+          }}>
+            Всего сотрудников: <strong>{employees.length}</strong>
+          </div>
         </div>
       </header>
     </div>

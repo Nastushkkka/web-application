@@ -42,10 +42,12 @@ export default function Table({ employees = [], onDelete, onAdd, onEdit }) {
       <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
           <tr style={{ textAlign: "left", borderBottom: "1px solid #ccc" }}>
-            <th style={{ padding: "8px" }}>#</th>
-            <th style={{ padding: "8px" }}>Имя</th>
-            <th style={{ padding: "8px" }}>Должность</th>
-            <th style={{ padding: "8px" }}>Действия</th>
+          <th style={{ padding: "8px" }}> 
+          <span style={{ visibility: "hidden" }}>#</span> 
+          </th>
+            <th style={{ padding: "8px 1px" }}>Имя</th>
+            <th style={{ padding: "8px 1px" }}>Должность</th>
+            <th style={{ padding: "8px 1px" }}>Действия</th>
           </tr>
         </thead>
         <tbody>
