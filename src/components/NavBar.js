@@ -41,6 +41,9 @@ export default function NavBar({ onLogout }) {
         <NavLink to="/about" style={linkStyle}>
           О приложении
         </NavLink>
+        <NavLink to="/products" style={linkStyle}>
+          Продукция
+        </NavLink> {linkStyle}
       </div>
       <div>
         <button onClick={onLogout} style={{ padding: "6px 10px", cursor: "pointer" }}>

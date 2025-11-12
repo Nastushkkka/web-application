@@ -5,7 +5,7 @@ import Table from "./Table";
 import Login from "./components/Login";
 import NavBar from "./components/NavBar";
 import { isAuthenticated, getUser, logout } from "./utils/auth";
-import { generateNumericId } from "./utils/id"; // <- добавлено
+import { generateNumericId } from "./utils/id";
 
 export default function App() {
   const [employees, setEmployees] = useState([]);
