@@ -13,7 +13,7 @@ export default function Products() {
         boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
       }}>
         <img
-          src="https://via.placeholder.com/300x200.png?text=Товар+1"
+          src="/images/product1.jpg" 
           alt="Товар 1"
           style={{ width: "100%", borderRadius: "4px" }}
         />
@@ -24,3 +24,4 @@ export default function Products() {
     </div>
   );
 }
+

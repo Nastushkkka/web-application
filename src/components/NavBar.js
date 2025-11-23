@@ -46,9 +46,7 @@ export default function NavBar({ onLogout }) {
         </NavLink> {linkStyle}
       </div>
       <div>
-        <button onClick={onLogout} style={{ padding: "6px 10px", cursor: "pointer" }}>
-          Выйти
-        </button>
+        
       </div>
     </nav>
   );

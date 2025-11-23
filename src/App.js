@@ -3,7 +3,6 @@ import "./App.css";
 import EmployeeAPI from "./api/service";
 import Table from "./Table";
 import Login from "./components/Login";
-import NavBar from "./components/NavBar";
 import { isAuthenticated, getUser, logout } from "./utils/auth";
 import { generateNumericId } from "./utils/id";
 
@@ -37,11 +36,10 @@ export default function App() {
   const handleAdd = (name, job) => {
     if (!name || !name.trim()) return;
     const newEmployee = {
-      id: generateNumericId(), // уникальный числовой ID
+      id: generateNumericId(),
       name: name.trim(),
       job: (job || "").trim() || "Unknown",
     };
-   
     EmployeeAPI.add(newEmployee);
     setEmployees(EmployeeAPI.all());
   };
@@ -72,43 +70,54 @@ export default function App() {
 
   return (
     <div className="App">
-      <NavBar onLogout={handleLogout} />
-      <header className="App-header" style={{ width: "100%" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
-          <div>
-            <h3 style={{ margin: 0 }}>Привет, {greeting}!</h3>
-            <div style={{ fontSize: 28, color: "#ddd" }}>Добро пожаловать в приложение!</div>
-          </div>
-          <div>
-            <button onClick={handleLogout} style={{ padding: "6px 10px", cursor: "pointer" }}>
-              Выйти
-            </button>
-          </div>
+      <header className="app-header">
+        {/* Верхняя часть шапки */}
+        <div className="header-top">
+          <h1 className="header-title">Мой магазин</h1>
+          <div className="user-info">Приветствуем Вас, {greeting}!</div>
         </div>
 
-        <div style={{ marginTop: 20, width: "100%" }}>
-          <Table
-            employees={employees}
-            onDelete={handleDelete}
-            onAdd={handleAdd}
-            onEdit={handleEdit}
-          />
-
-          {/* Счётчик сотрудников */}
-          <div style={{
-            marginTop: 12,
-            padding: "10px 12px",
-            background: "#fafafa",
-            border: "1px solid #eee",
-            borderRadius: 6,
-            display: "inline-block",
-            fontSize: 14,
-            color: "#333"
-          }}>
-            Всего сотрудников: <strong>{employees.length}</strong>
-          </div>
+        {/* Нижняя часть шапки */}
+        <div className="header-bottom">
+          <nav className="header-nav">
+            <a href="/catalog" className="active">Каталог</a>
+            <a href="/cart">Корзина</a>
+            <a href="/orders">Заказы</a>
+            <a href="/profile">Мой профиль</a>
+            <a href="/profile">Сотрудники</a>
+            <a href="/profile">О нас</a>
+          </nav>
+          <button onClick={handleLogout} className="logout-btn">Выйти</button>
         </div>
       </header>
+
+      {/* Основной контент */}
+      <main className="app-content">
+        <button className="add-btn" onClick={() => handleAdd("Новый сотрудник", "Unknown")}>
+          Добавить сотрудника
+        </button>
+
+        <Table
+          employees={employees}
+          onDelete={handleDelete}
+          onAdd={handleAdd}
+          onEdit={handleEdit}
+        />
+
+        {/* Счётчик сотрудников */}
+        <div style={{
+          marginTop: 12,
+          padding: "10px 12px",
+          background: "#fafafa",
+          border: "1px solid #eee",
+          borderRadius: 6,
+          display: "inline-block",
+          fontSize: 14,
+          color: "#333"
+        }}>
+          Всего сотрудников: <strong>{employees.length}</strong>
+        </div>
+      </main>
     </div>
   );
 }

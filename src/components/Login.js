@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { login as doLogin } from '../utils/auth';
+import './Login.css'; 
 
 export default function Login(props) {
   const [firstName, setFirstName] = useState('');
@@ -34,76 +35,33 @@ export default function Login(props) {
   }
 
   return (
-    <div style={{ maxWidth: 420, margin: '40px auto', padding: 18, border: '1px solid #ddd', borderRadius: 6 }}>
-      <h2 style={{ marginTop: 0 }}>Вход / Регистрация</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: 8 }}>
-          <label style={{ display: 'block', marginBottom: 4 }}>Имя (необязательно)</label>
-          <input
-            value={firstName}
-            onChange={e => setFirstName(e.target.value)}
-            style={{ width: '100%', padding: 8 }}
-            type="text"
-            name="firstName"
-            autoComplete="given-name"
-          />
-        </div>
+    <div className="login-wrapper">
+      <div className="login-box">
+        <h2>Ваш личный кабинет</h2>
+        <form onSubmit={handleSubmit}>
+          <label>Имя (необязательно):</label>
+          <input value={firstName} onChange={e => setFirstName(e.target.value)} type="text" />
 
-        <div style={{ marginBottom: 8 }}>
-          <label style={{ display: 'block', marginBottom: 4 }}>Фамилия (необязательно)</label>
-          <input
-            value={lastName}
-            onChange={e => setLastName(e.target.value)}
-            style={{ width: '100%', padding: 8 }}
-            type="text"
-            name="lastName"
-            autoComplete="family-name"
-          />
-        </div>
+          <label>Фамилия (необязательно):</label>
+          <input value={lastName} onChange={e => setLastName(e.target.value)} type="text" />
 
-        <div style={{ marginBottom: 8 }}>
-          <label style={{ display: 'block', marginBottom: 4 }}>Email</label>
-          <input
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            style={{ width: '100%', padding: 8 }}
-            type="email"
-            name="email"
-            autoComplete="email"
-            required
-          />
-        </div>
+          <label>Email:</label>
+          <input value={email} onChange={e => setEmail(e.target.value)} type="email" required />
 
-        <div style={{ marginBottom: 12 }}>
-          <label style={{ display: 'block', marginBottom: 4 }}>Пароль</label>
-          <input
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            style={{ width: '100%', padding: 8 }}
-            type="password"
-            name="password"
-            autoComplete="current-password"
-            required
-          />
-        </div>
+          <label>Пароль:</label>
+          <input value={password} onChange={e => setPassword(e.target.value)} type="password" required />
 
-        {error && <div style={{ color: 'red', marginBottom: 12 }}>{error}</div>}
+          {error && <div className="error">{error}</div>}
 
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button type="submit" style={{ padding: '8px 14px', cursor: 'pointer' }}>Войти</button>
-          <button
-            type="button"
-            onClick={() => {
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button type="submit">Войти</button>
+            <button type="button" onClick={() => {
               setFirstName(''); setLastName(''); setEmail(''); setPassword(''); setError('');
-            }}
-            style={{ padding: '8px 12px', cursor: 'pointer' }}
-          >
-            Очистить
-          </button>
-        </div>
-      </form>
+            }}>Очистить</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
-
 
