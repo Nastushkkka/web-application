@@ -82,7 +82,6 @@ export default function App() {
           <nav className="header-nav">
             <a href="/catalog" className="active">Каталог</a>
             <a href="/cart">Корзина</a>
-            <a href="/orders">Заказы</a>
             <a href="/profile">Мой профиль</a>
             <a href="/profile">Сотрудники</a>
             <a href="/profile">О нас</a>

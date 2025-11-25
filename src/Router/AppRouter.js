@@ -1,26 +1,33 @@
-import React from "react";
+// src/Router/AppRouter.jsx
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import App from '../App';
-import About from '../pages/About';
-import NotFound from '../pages/NotFound';
-import Products from '../pages/Products'; 
-import Login from '../components/Login';
-import { isAuthenticated } from '../utils/auth';
+import SiteFrame from "../components/SiteFrame";
+import App from "../App"; // страница сотрудников (таблица)
+import About from "../pages/About";
+import Catalog from "../pages/Catalog";
+import Cart from "../pages/Basket";
+import Profile from "../pages/Profile";
+import NotFound from "../pages/NotFound";
+import Login from "../components/Login";
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/products" element={<Products />} />
-        <Route
-          path="/login"
-          element={
-            isAuthenticated() ? <Navigate to="/" replace /> : <Login onLogin={() => window.location.replace("/")} />
-          }
-        />
-        <Route path="*" element={<NotFound />} />
+        {/* редирект с корня на каталог */}
+        <Route path="/" element={<Navigate to="/catalog" replace />} />
+
+        {/* рамка с шапкой и навигацией */}
+        <Route path="/" element={<SiteFrame />}>
+          <Route path="catalog" element={<Catalog />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="employees" element={<App />} />
+          <Route path="about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+
+        {/* отдельный маршрут для логина */}
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

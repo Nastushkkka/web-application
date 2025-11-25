@@ -10,18 +10,29 @@ export default function Products() {
         padding: "16px",
         maxWidth: "300px",
         margin: "20px auto",
-        boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
+        boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+        textAlign: "center"
       }}>
         <img
-          src="/images/product1.jpg" 
+          src="/images/product1.jpg"
           alt="Товар 1"
-          style={{ width: "100%", borderRadius: "4px" }}
+          style={{
+            width: "180px",
+            height: "180px",
+            objectFit: "cover",
+            borderRadius: "6px",
+            display: "block",
+            margin: "0 auto 12px"
+          }}
         />
-        <h3>Название товара</h3>
-        <p>Описание: качественный, стильный, доступный.</p>
+        <h3 style={{ fontSize: "18px", color: "#1c4284", margin: "8px 0" }}>Название товара</h3>
+        <p style={{ fontSize: "14px", color: "#333", marginBottom: "8px" }}>
+          Описание: качественный, стильный, доступный.
+        </p>
         <p style={{ fontWeight: "bold", color: "#2e7d32" }}>Цена: 99 BYN</p>
       </div>
     </div>
   );
 }
+
 

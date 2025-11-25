@@ -1,0 +1,21 @@
+.page-container {
+  padding: 24px;
+  max-width: 900px;
+  margin: 20px auto;
+  background: #fdfdfd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.page-title {
+  font-size: 28px;
+  margin-bottom: 16px;
+  color: #1c4284; /* фирменный синий */
+}
+
+.page-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 14px;
+}
