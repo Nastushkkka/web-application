@@ -1,15 +1,22 @@
 import React from "react";
 import { getUser, logout } from "../utils/auth";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 export default function Profile() {
+  const navigate = useNavigate();
   const user = getUser() || {};
   const fullName = [user.firstName, user.lastName].filter(Boolean).join(" ");
   const greeting = fullName || user.email || "гость";
 
   function handleLogout() {
     logout();
-    window.location.replace("/login");
+    navigate("/login"); 
+  }
+
+  if (!user.email) {
+    navigate("/login");
+    return null;
   }
 
   return (

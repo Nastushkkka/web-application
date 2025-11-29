@@ -1,6 +1,6 @@
 .page-container {
   padding: 24px;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 20px auto;
   background: #fdfdfd;
   border-radius: 8px;
@@ -10,7 +10,7 @@
 .page-title {
   font-size: 28px;
   margin-bottom: 16px;
-  color: #1c4284; /* фирменный синий */
+  color: #1c4284; 
 }
 
 .page-text {

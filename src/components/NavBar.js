@@ -1,26 +1,3 @@
-/*import React from 'react';
-import { NavLink } from 'react-router-dom';
-
-export default function NavBar() {
-  return (
-    <nav>
-      <NavLink to="/" end style={({ isActive }) => ({ fontWeight: isActive ? 'bold' : 'normal' })}>
-        Home
-      </NavLink>
-      {' | '}
-      <NavLink to="/about" style={({ isActive }) => ({ fontWeight: isActive ? 'bold' : 'normal' })}>
-        About
-      </NavLink>
-      {' | '}
-      <NavLink to="/dashboard" style={({ isActive }) => ({ fontWeight: isActive ? 'bold' : 'normal' })}>
-        Dashboard
-      </NavLink>
-    </nav>
-  );
-}
-*/
-
-
 import React from "react";
 import { NavLink } from "react-router-dom";
 

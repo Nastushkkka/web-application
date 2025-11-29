@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { login as doLogin } from '../utils/auth';
-import './Login.css'; 
+import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
 export default function Login(props) {
   const [firstName, setFirstName] = useState('');
@@ -8,6 +9,7 @@ export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   function validate() {
     if (!email || !password) return 'Введите email и пароль';
@@ -26,12 +28,15 @@ export default function Login(props) {
     const user = {
       email: email.trim(),
       firstName: firstName.trim() || null,
-      lastName: lastName.trim() || null
+      lastName: lastName.trim() || null,
+      role: "Пользователь"
     };
 
     doLogin(user);
     setError('');
     if (typeof props.onLogin === 'function') props.onLogin(user);
+
+    navigate("/profile"); 
   }
 
   return (

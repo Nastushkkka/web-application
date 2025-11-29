@@ -1,38 +1,48 @@
+/* Контейнер для всех карточек */
+.products-container {
+  display: flex;
+  flex-wrap: wrap;          /* карточки переносятся на новую строку */
+  justify-content: center;  /* выравнивание по центру */
+  gap: 20px;                /* расстояние между карточками */
+  margin-top: 40px;
+}
+
+/* Карточка товара */
 .product-card {
-  width: 240px;
-  padding: 16px;
-  background: #fdfdfd;
-  border: 1px solid #eee;
+  width: 260px;             /* фиксированная ширина карточки */
+  padding: 12px;
+  border: 1px solid #e6e6e6;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background: #fff;
+  box-sizing: border-box;
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin: 12px;
 }
 
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+/* Обёртка для картинки */
+.product-image-wrapper {
+  height: 140px;            /* фиксированная высота блока под картинку */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;         /* лишнее обрезается */
 }
 
+/* Картинка */
 .product-image {
-  width: 180px;       /* фиксируем размер */
-  height: 180px;
-  object-fit: cover;  /* аккуратно обрезает лишнее */
+  max-width: 100%;          /* не шире контейнера */
+  max-height: 100%;         /* не выше контейнера */
+  object-fit: cover;        /* аккуратно обрезает */
   border-radius: 6px;
-  margin-bottom: 12px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-
+/* Заголовок */
 .product-card h3 {
   font-size: 18px;
   margin: 8px 0;
-  color: #1c4284; /* тот же фирменный синий, что и в Page.css */
+  color: #1c4284;
 }
 
+/* Описание */
 .product-card p {
   font-size: 14px;
   line-height: 1.4;
@@ -40,12 +50,14 @@
   margin-bottom: 8px;
 }
 
+/* Цена */
 .price {
   font-weight: bold;
   color: #1c4284;
   margin-top: 8px;
 }
 
+/* Кнопка удаления */
 .remove-btn {
   margin-top: 10px;
   padding: 8px 12px;
