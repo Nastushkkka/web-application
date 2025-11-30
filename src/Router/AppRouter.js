@@ -7,6 +7,7 @@ import Cart from "../pages/Basket";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
 import Login from "../components/Login";
+import Employees from "../pages/Employees"; 
 
 export default function AppRouter() {
   return (
@@ -20,7 +21,7 @@ export default function AppRouter() {
           <Route path="catalog" element={<Catalog />} />
           <Route path="cart" element={<Cart />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="employees" element={<App />} />
+          <Route path="employees" element={<Employees />} /> 
           <Route path="about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Route>
