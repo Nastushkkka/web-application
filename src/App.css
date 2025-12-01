@@ -103,6 +103,7 @@ html, body, .App {
   background: #666;
 }
 
+ /* в этих стилях больше нет необходимости, заменили на material
 .add-btn {
   padding: 0.75rem 1.5rem;
   background: #0d3b69;
@@ -118,6 +119,7 @@ html, body, .App {
 .add-btn:hover {
   background: #4682b4;
 }
+  */
 
 /* Контент */
 .app-content {

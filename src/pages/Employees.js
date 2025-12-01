@@ -3,6 +3,9 @@ import Table from "../Table";
 import EmployeeAPI from "../api/service";
 import { generateNumericId } from "../utils/id";
 import "../App.css";
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 
 export default function Employees() {
   const [employees, setEmployees] = useState([]);
@@ -39,12 +42,23 @@ export default function Employees() {
 
   return (
     <div className="page-container">
+     
+     {/* было до использования Material
       <button
         className="add-btn"
         onClick={() => handleAdd("Новый сотрудник", "Unknown")}
       >
         Добавить сотрудника
-      </button>
+      </button>*/}
+
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => handleAdd("Новый сотрудник", "Unknown")}
+      >
+        Добавить сотрудника
+      </Button>
+
 
       <Table
         employees={employees}
@@ -53,9 +67,18 @@ export default function Employees() {
         onEdit={handleEdit}
       />
 
+      {/* БЫЛО
       <div className="employee-counter">
         Всего сотрудников: <strong>{employees.length}</strong>
       </div>
+      */}
+
+      <Paper elevation={2} style={{ padding: "10px 12px", marginTop: 12 }}>
+        <Typography variant="body1">
+          Всего сотрудников: <strong>{employees.length}</strong>
+        </Typography>
+      </Paper>
+
     </div>
   );
 }

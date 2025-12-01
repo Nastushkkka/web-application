@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SiteFrame from "../components/SiteFrame";
-import App from "../App"; 
 import About from "../pages/About";
 import Catalog from "../pages/Catalog";
 import Cart from "../pages/Basket";
