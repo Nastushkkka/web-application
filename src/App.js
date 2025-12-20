@@ -1,122 +1,71 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import EmployeeAPI from "./api/service";
-import Table from "./Table";
-import Login from "./components/Login";
-import { isAuthenticated, getUser, logout } from "./utils/auth";
-import { generateNumericId } from "./utils/id";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { cycleTheme } from './store/slices/themeSlice';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+import { SnackbarProvider } from 'notistack';
+import AppRouter from './router/AppRouter';
+import Login from './pages/Login';
+import { isAuthenticated, logout } from './utils/auth';
+import './styles/App.css';
 
 export default function App() {
-  const [employees, setEmployees] = useState([]);
+  const dispatch = useDispatch();
+  const themeState = useSelector((state) => state.theme.current);
   const [auth, setAuth] = useState(isAuthenticated());
 
-  useEffect(() => {
-    if (auth) {
-      setEmployees(EmployeeAPI.all());
-    } else {
-      setEmployees([]);
-    }
-  }, [auth]);
+  // Создаём MUI тему на основе текущей темы
+  const theme = createTheme({
+    palette: {
+      mode: themeState.name === 'dark' ? 'dark' : 'light',
+      primary: {
+        main: themeState.primary,
+      },
+      secondary: {
+        main: themeState.secondary,
+      },
+    },
+  });
 
   useEffect(() => {
-    function onStorage(e) {
-      if (e.key === "webapp_user") {
+    const onStorage = (e) => {
+      if (e.key === 'webapp_user') {
         setAuth(isAuthenticated());
       }
-    }
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
   }, []);
 
-  const handleDelete = (number) => {
-    EmployeeAPI.delete(number);
-    setEmployees(EmployeeAPI.all());
-  };
+  const handleLogin = () => setAuth(true);
 
-  const handleAdd = (name, job) => {
-    if (!name || !name.trim()) return;
-    const newEmployee = {
-      id: generateNumericId(),
-      name: name.trim(),
-      job: (job || "").trim() || "Unknown",
-    };
-    EmployeeAPI.add(newEmployee);
-    setEmployees(EmployeeAPI.all());
-  };
-
-  const handleEdit = (number, { name, job }) => {
-    const existing = EmployeeAPI.get(number);
-    if (!existing) return;
-    EmployeeAPI.update({ number, name: name.trim(), job: (job || "").trim() || "Unknown" });
-    setEmployees(EmployeeAPI.all());
-  };
-
-  function handleLogin() {
-    setAuth(true);
-  }
-
-  function handleLogout() {
+  const handleLogout = () => {
     logout();
     setAuth(false);
-  }
+  };
+
+  const handleCycleTheme = () => {
+    dispatch(cycleTheme());
+  };
 
   if (!auth) {
     return <Login onLogin={handleLogin} />;
   }
 
-  const user = getUser() || {};
-  const fullName = [user.firstName, user.lastName].filter(Boolean).join(" ");
-  const greeting = fullName || user.email || "гость";
-
   return (
-    <div className="App">
-      <header className="app-header">
-        {/* Верхняя часть шапки */}
-        <div className="header-top">
-          <h1 className="header-title">Мой магазин</h1>
-          <div className="user-info">Приветствуем Вас, {greeting}!</div>
-        </div>
-
-        {/* Нижняя часть шапки */}
-        <div className="header-bottom">
-          <nav className="header-nav">
-            <a href="/catalog" className="active">Каталог</a>
-            <a href="/cart">Корзина</a>
-            <a href="/profile">Мой профиль</a>
-            <a href="/profile">Сотрудники</a>
-            <a href="/profile">О нас</a>
-          </nav>
-          <button onClick={handleLogout} className="logout-btn">Выйти</button>
-        </div>
-      </header>
-
-      {/* Основной контент */}
-      <main className="app-content">
-        <button className="add-btn" onClick={() => handleAdd("Новый сотрудник", "Unknown")}>
-          Добавить сотрудника
-        </button>
-
-        <Table
-          employees={employees}
-          onDelete={handleDelete}
-          onAdd={handleAdd}
-          onEdit={handleEdit}
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <SnackbarProvider 
+        maxSnack={3} 
+        autoHideDuration={5000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <AppRouter
+          currentTheme={themeState}
+          onCycleTheme={handleCycleTheme}
+          onLogout={handleLogout}
         />
-
-        {/* Счётчик сотрудников */}
-        <div style={{
-          marginTop: 12,
-          padding: "10px 12px",
-          background: "#fafafa",
-          border: "1px solid #eee",
-          borderRadius: 6,
-          display: "inline-block",
-          fontSize: 14,
-          color: "#333"
-        }}>
-          Всего сотрудников: <strong>{employees.length}</strong>
-        </div>
-      </main>
-    </div>
+      </SnackbarProvider>
+    </ThemeProvider>
   );
 }
