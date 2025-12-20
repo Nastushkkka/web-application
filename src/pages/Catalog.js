@@ -1,94 +1,86 @@
-/*import React from "react";
-import ProductCard from "../components/ProductCard";
-import "../App.css";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../store/slices/cartSlice';
+import { useSnackbar } from 'notistack';
+import { Box, Typography, Grid } from '@mui/material';
+import ProductCard from '../components/ProductCard/ProductCard';
 
 const products = [
   {
     id: 1,
-    title: "Товар 1",
-    description: "Качественный, стильный, доступный.",
-    price: 99,
-    image: "/images/product1.jpg"
+    title: 'Колер жёлто-коричневый',
+    description: 'Для внутренних работ',
+    price: 9,
+    image: '/images/koler1.jpg',
   },
   {
     id: 2,
-    title: "Товар 2",
-    description: "Практичный и современный.",
-    price: 120,
-    image: "/images/product2.jpg"
+    title: 'Колер серо-голубой',
+    description: 'Цвет-хит сезона',
+    price: 9,
+    image: '/images/koler2.jpg',
   },
   {
     id: 3,
-    title: "Товар 3",
-    description: "Надёжный и современный.",
-    price: 150,
-    image: "/images/product3.jpg"
-  }
+    title: 'Эмаль для пола',
+    description: 'Износостойкая эмаль жёлто-коричневая',
+    price: 15,
+    image: '/images/product1.jpg',
+  },
+  {
+    id: 4,
+    title: 'Шпатлёвка',
+    description: 'Полимерная для гипсокартона',
+    price: 20,
+    image: '/images/product2.jpg',
+  },
+  {
+    id: 5,
+    title: 'Грунтовка',
+    description: 'Церезит СТ17',
+    price: 32,
+    image: '/images/product3.jpg',
+  },
+  {
+    id: 6,
+    title: 'Кисть малярная',
+    description: '70 мм',
+    price: 7,
+    image: '/images/product4.jpg',
+  },
 ];
 
 export default function Catalog() {
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+    enqueueSnackbar(`${product.title} добавлен в корзину!`, { 
+      variant: 'success',
+      autoHideDuration: 3000,
+    });
+  };
+
   return (
-    <div className="page-container">
-      <h1 className="page-title">Наши товары</h1>
-      <div className="products-container">
+    <Box>
+      <Typography variant="h4" gutterBottom sx={{ color: 'primary.main', fontWeight: 'bold' }}>
+        Наши товары
+      </Typography>
+
+      <Grid container spacing={3}>
         {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            image={product.image}
-            title={product.title}
-            description={product.description}
-            price={product.price}
-          />
+          <Grid item xs={12} sm={6} md={4} key={product.id}>
+            <ProductCard
+              image={product.image}
+              title={product.title}
+              description={product.description}
+              price={product.price}
+              onAddToCart={() => handleAddToCart(product)}
+            />
+          </Grid>
         ))}
-      </div>
-    </div>
-  );
-}
-*/
-
-import React from "react";
-import ProductCard from "../components/ProductCard";
-import "../components/ProductCard.css"; // подключаем стили карточек
-
-const products = [
-  {
-    id: 1,
-    title: "Товар 1",
-    description: "Качественный, стильный, доступный.",
-    price: 99,
-    image: "/images/koler1.jpg"
-  },
-  {
-    id: 2,
-    title: "Товар 2",
-    description: "Практичный и современный.",
-    price: 120,
-    image: "/images/koler2.jpg"
-  },
-  {
-    id: 3,
-    title: "Товар 3",
-    description: "Надёжный и современный.",
-    price: 150,
-    image: "/images/product1.jpg"
-  }
-];
-
-export default function Catalog() {
-  return (
-    <div className="page-container">
-      <h1 className="page-title">Наши товары</h1>
-      <div className="products-container">
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            image={product.image}
-            title={product.title}
-            description={product.description}
-            price={product.price}
-          />
-        ))}
-      </div>
-    </div>
+      </Grid>
+    </Box>
   );
 }
