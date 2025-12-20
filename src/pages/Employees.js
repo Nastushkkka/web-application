@@ -92,7 +92,7 @@ export default function Employees() {
   // Когда таймер истёк или отменено
   const handleDeleteClose = (wasCancelled) => {
     if (!wasCancelled && pendingDelete) {
-      // Не отменено — удаляем!
+      // Не отменено, удаляем
       dispatch(deleteEmployee(pendingDelete.id));
       enqueueSnackbar(`${pendingDelete.name} удалён`, { variant: 'success' });
     }

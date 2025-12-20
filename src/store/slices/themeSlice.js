@@ -25,12 +25,6 @@ const themes = {
     primary: '#f57c00',
     secondary: '#d32f2f',
   },
-  ocean: {
-    name: 'ocean',
-    label: '🌊 Океан',
-    primary: '#0288d1',
-    secondary: '#00838f',
-  },
 };
 
 const loadTheme = () => {

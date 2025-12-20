@@ -88,7 +88,6 @@ html, body, .App {
   color: rgb(255, 255, 255);
 }
 
-/* Кнопки */
 .logout-btn {
   padding: 0.5rem 1rem;
   background: #930909;
@@ -103,7 +102,7 @@ html, body, .App {
   background: #666;
 }
 
- /* в этих стилях больше нет необходимости, заменили на material
+ /* в этих стилях больше нет необходимости, заменила на material
 .add-btn {
   padding: 0.75rem 1.5rem;
   background: #0d3b69;

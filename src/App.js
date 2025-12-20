@@ -14,7 +14,7 @@ export default function App() {
   const themeState = useSelector((state) => state.theme.current);
   const [auth, setAuth] = useState(isAuthenticated());
 
-  // Создаём MUI тему на основе текущей темы
+  // Создаём MUI тему на основе текущей 
   const theme = createTheme({
     palette: {
       mode: themeState.name === 'dark' ? 'dark' : 'light',

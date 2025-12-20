@@ -10,7 +10,7 @@ export default function Profile() {
   const fullName = [user.firstName, user.lastName].filter(Boolean).join(' ');
   const greeting = fullName || user.email || 'гость';
 
-  // Если не авторизован — редирект
+  // Если не авторизован-редирект
   if (!user.email) {
     navigate('/login');
     return null;

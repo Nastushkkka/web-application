@@ -58,7 +58,7 @@ export default function Basket() {
   };
 
   const handleCheckout = () => {
-    enqueueSnackbar('Заказ оформлен! Спасибо за покупку! 🎉', { 
+    enqueueSnackbar('Заказ оформлен! Спасибо за покупку!', { 
       variant: 'success',
       autoHideDuration: 5000,
     });

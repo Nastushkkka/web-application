@@ -1,7 +1,7 @@
 import axiosInstance from './axios';
 import { ENDPOINTS } from './endpoints';
 
-// Локальные данные (имитация базы данных)
+// Локальные данные 
 let localEmployees = [
   { id: 1, name: 'Анастасия Лихачева', job: 'Менеджер' },
   { id: 2, name: 'Михаил Иванов', job: 'Продавец' },
